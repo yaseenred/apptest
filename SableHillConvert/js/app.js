@@ -6,7 +6,7 @@ var apphist = new Array();
 function GetServer()
 {
 	//return "http://dev1.local/mobile/";
-	return "http://sablehills.syncip.co.za/mobile/";
+	return "http://sableapp.cactusweb.co.za/mobile/";
 }
 
 function GoBack()
