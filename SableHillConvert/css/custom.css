@@ -1,0 +1,19 @@
+#navpanel {
+background-color:#121f04;
+opacity:0.90;
+}
+
+#navpanel ul, #navpanel ul li, #navpanel ul li a {
+    background-color: transparent !important;
+    background-image: url('') !important;
+}
+
+.groupheader {
+text-align:center;
+background-color:#d6d6d6;
+font-weight:bold;
+}
+
+.pnlbg {
+background:#b5a68e;    
+}

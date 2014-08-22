@@ -1,0 +1,161 @@
+<!DOCTYPE html> 
+<html> 
+   <head> 
+   <title></title> 
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1"> 
+   
+   <link rel="stylesheet" href="css/themes/appvance.min.css" />
+   <link rel="stylesheet" href="css/themes/jquery.mobile.structure-1.4.2.min.css" />  
+   <link rel="stylesheet" href="css/themes/jquery.mobile.icons-1.4.2.min.css" />     
+   <link rel="stylesheet" href="css/custom.css" />     
+   <link rel="stylesheet" href="css/fullcalendar.css" />      
+   <link rel="stylesheet" href="css/fullcalendar.print.css" />      
+   
+   <script src="js/energize.js"></script>
+   <script src="js/jquery.js"></script>
+   <script src="js/json2.js"></script>
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="PushNotification.js"></script>
+
+   <script type="text/javascript" src="js/PushwooshAndroid.js"></script>
+   <script type="text/javascript" src="js/PushwooshiOS.js"></script>
+   <script type="text/javascript" src="js/index.js"></script>
+      
+   <script type="text/javascript" src="js/moment.min.js"></script>
+   <script type="text/javascript" src="js/fullcalendar.min.js"></script>             
+   
+	<script type="text/javascript">	
+	
+		$.fx.off = true;	
+		$(document).bind("mobileinit", function(){  
+			$.mobile.allowCrossDomainPages = true;
+			$.mobile.defaultDialogTransition = "none";
+			$.mobile.defaultPageTransition = "none";
+            $.fn.buttonMarkup.defaults.corners=false;
+		}); 
+	
+	</script>   
+   
+   <script src="js/jquery.mobile-1.4.2.min.js"></script>	
+   <script src="js/app.js"></script>   
+   <!--<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>-->
+
+   <script type="text/javascript" charset="utf-8">    
+        
+		function StartApp()
+		{
+			GetDatabag(); 	
+			if(window.localStorage.getItem('userid') == null)
+				LoadContent('signin');
+			else			
+				LoadContent('home');
+		}
+		
+        $(function() 
+        {      
+			app.initialize();			
+            document.addEventListener("deviceready", onDeviceReady, true);                        
+        });
+    
+        function onDeviceReady() 
+        {               
+            if(!IsBlackBerryOS6()) // os6 crashes on usage of local storage
+            {
+	            document.addEventListener("backbutton", onBackKeyDown, true);
+            }			
+        }
+        
+        $( document ).on( "pagecreate", "#homepage", function() {
+            $( document ).on( "swipeleft swiperight", "#homepage", function( e ) {
+                // We check if there is no open panel on the page because otherwise
+                // a swipe to close the left panel would also open the right panel (and v.v.).
+                // We do this by checking the data that the framework stores on the page element (panel: open).
+                if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
+                    if ( e.type === "swiperight" ) {
+                        $( "#navpanelleft" ).panel( "open" );
+                    }
+                }
+            });
+        });        
+        
+        function onBackKeyDown() {					
+			if(!GoBack())			
+			{
+				if (navigator.app && navigator.app.exitApp) {
+					navigator.app.exitApp();
+				} else if (navigator.device && navigator.device.exitApp) {
+					navigator.device.exitApp();
+				}
+			}
+        }
+        
+        function hiddenIFrameLoaded()
+        {    
+            StartApp();   
+        }
+
+    </script>   
+   
+</head> 
+
+<style>
+
+h4 { margin-top:0px; }
+
+</style>
+
+<body> 
+
+<iframe style="width:0px;height:0px;border:0px;" name="hiddenIFrame" onload="hiddenIFrameLoaded();"></iframe>
+<input type="hidden" name="currentaction" id="currentaction">
+<input type="hidden" name="prevaction" id="prevaction">
+
+<div data-role="page" id="homepage" data-theme="a">
+
+	<div data-role="header" data-theme="a" data-position="fixed" data-tap-toggle="false" style="background:url('images/header.png');">      
+	  <a href="#navpanelleft" id="btnnavpanelleft" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-btn-c ui-icon-bars" style="display:none; margin-top:20px;"></a>	  	
+	  <h1 style="padding:5px;height:65px;margin:0px;margin-top:0px;"><img src="images/logo.png"><br /></h1>     
+	  <a href="#" onclick="LoadContent('module/alert');" data-role="none" style="margin-top:20px;"><img src="images/alert.png"></a>	  
+	</div>          
+	
+	<div data-role="main" id="content" data-theme="a" style="padding:10px;">  
+		
+		 
+		
+	</div>
+
+	<!--
+	<div data-role="footer" data-theme="g" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false" id="navbar">		
+		<div data-role="navbar" class="nav-glyphish-example">
+			<ul>                
+				<li><a href="#" id="home" data-icon="home" onclick="LoadContent('home');">Home</a></li>           
+				<li><a href="#" id="icup" data-icon="arrow-u" onclick="ScrollTop();">Top</a></li>           
+				<li><a href="#" id="contact" data-icon="mail" onclick="LoadContent('feedback');">Contact Us</a></li>           				
+			</ul>
+		</div>   
+	</div>  
+	-->
+	
+	<div data-role="panel" id="navpanelleft" data-position="left" data-display="overlay" data-theme="a" class="pnlbg" style="padding:0px">		
+	</div><!-- /panel -->
+	
+	<div data-role="panel" id="navpanelright" data-position="right" data-display="overlay" data-theme="a" class="pnlbg" style="padding:0px">		
+	</div><!-- /panel -->
+</div>  
+
+<div data-role="dialog" id="msgdlg">
+   
+      <div data-role="header" data-theme="a">
+         <h1 id="msgtitle"></h1>
+      </div>
+
+      <div data-role="content" data-theme="a">         
+        <div id="msgcontent"></div>
+        <br />
+        <a href="#" data-role="button" data-rel="back" data-theme="c">Close</a>
+      </div>
+</div><!-- /dialog -->      
+                  
+</body>
+</html>
