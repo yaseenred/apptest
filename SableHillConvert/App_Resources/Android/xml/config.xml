@@ -7,11 +7,47 @@
 
     <log level="DEBUG"/>
     <preference name="useBrowserHistory" value="true" />
-    <preference name="exit-on-suspend" value="false" />
+	<preference name="SuppressesIncrementalRendering" value="true" />
+    <preference name="android-installLocation" value="auto" />
+    <preference name="EnableViewportScale" value="true" />
+    <preference name="stay-in-webview" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="true" />
+    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="BackgroundColor" value="" />
+    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="AllowInlineMediaPlayback" value="true" />
+    <preference name="target-device" value="universal" />
+    <preference name="ErrorUrl" value="" />
+    <preference name="exit-on-suspend" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="orientation" value="default" />
+    <preference name="HideKeyboardFormAccessoryBar" value="true" />
+    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="LoadingDialog" value="," />
+    <preference name="android-minSdkVersion" value="7" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="disable-cursor" value="true" />
+    <preference name="LoadUrlTimeoutValue" value="20000" />
+    <preference name="TopActivityIndicator" value="gray" />
+    <preference name="fullscreen" value="true" />
 
     <!-- For projects that target Apache Cordova 3.0.0 only, this <feature></feature> block ensures that button events and App plugin-related functionality will work as expected. -->
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
+    </feature>
+    
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    
+    <feature name="PushNotification">
+        <param name="android-package" onload="true" value="com.pushwoosh.plugin.pushnotifications.PushNotifications" />
     </feature>
 
     <!-- For projects that target Apache Cordova 3.0 and later, comment out or delete the <plugins></plugins> block and its contents. -->
@@ -35,12 +71,8 @@
         <plugin name="Echo" value="org.apache.cordova.Echo" />
         <plugin name="Globalization" value="org.apache.cordova.Globalization"/>
         <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser"/>
-        <plugin name="PushNotifications" value="com.pushwoosh.test.plugin.pushnotifications.PushNotifications" onload="true"/>
+        <plugin name="PushNotification" value="com.pushwoosh.test.plugin.pushnotifications.PushNotifications" onload="true"/>
     </plugins>
-    
-    <feature name="Device">
-        <param name="android-package" value="org.apache.cordova.device.Device" />
-    </feature>
     
 </cordova>
 
